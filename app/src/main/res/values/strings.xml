@@ -2,4 +2,25 @@
     <string name="app_name">Divisas</string>
     <string name="euro_text">Euros</string>
     <string name="introducir_cantidad">Introduce cantidad</string>
+    <string name="yen">Yen</string>
+    <string name="euro">Euro</string>
+    <string name="dolar">Dolar</string>
+    <string name="libra">Libra</string>
+    <string name="uno">1</string>
+    <string name="dos">2</string>
+    <string name="tres">3</string>
+    <string name="cuatro">4</string>
+    <string name="cinco">5</string>
+    <string name="seis">6</string>
+    <string name="siete">7</string>
+    <string name="ocho">8</string>
+    <string name="nueve">9</string>
+    <string name="zero">0</string>
+    <string name="ce">CE</string>
+    <string name="coma">,</string>
+    <string name="nothing">NOTHING</string>
+    <string name="atras">Borrar</string>
+    <string name="igual">=</string>
+    <string name="resultado">Resultado</string>
+    <string name="yuan">Yuan</string>
 </resources>
