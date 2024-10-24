@@ -6,8 +6,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import ivan.vega.divisas.R;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.IdRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -18,6 +20,11 @@ public class MainActivity extends AppCompatActivity {
     EditText inputValor;
     TextView resultado;
     RadioGroup redioGroupDivisas;
+
+    public static final Double EUR_TO_DOLL = 1.08;
+    public static final Double EUR_TO_YUAN = 7.67;
+    public static final Double EUR_TO_YEN = 164.38;
+    public static final Double EUR_TO_LIB = 0.83;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         configurarBotonNumerico(R.id.button7,"7",inputValor);
         configurarBotonNumerico(R.id.button8,"8",inputValor);
         configurarBotonNumerico(R.id.button9,"9",inputValor);
+
         //La coma funciona algo diferente
 
         Button comaButton = findViewById(R.id.button11);
@@ -59,8 +67,30 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        Button borrarButon = findViewById(R.id.button13);
 
+
+        Button ceButton = findViewById(R.id.button12);
+        ceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Cuando se pulse este boton, el imput se tiene que limbiar,
+                inputValor.setText("");
+            }
+        });
+
+        Button borrarButon = findViewById(R.id.button13);
+        borrarButon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Tenemos que eliminar el ultimo elemento
+                String valorActual = inputValor.getText().toString();
+
+                if(!valorActual.isEmpty()){
+                    String nuevoValor = valorActual.substring(0,valorActual.length() -1);
+                    inputValor.setText(nuevoValor);
+                }
+            }
+        });
 
 
 
@@ -83,4 +113,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    private void realizarCambioConversion(String valorTexto, RadioGroup radioGroupDivisas, TextView textoResultado){
+        //Este metodo pido el valor actual del input, en que divisa de conversion se encuentra, y finalmente el resultado, para cambiarlo
+        if(!valorTexto.isEmpty()){
+            //Convertimos a double para poder operar
+            double valor = Double.parseDouble(valorTexto);
+            double resultado = 0;
+
+            switch (radioGroupDivisas.getCheckedRadioButtonId()){
+                //Este switch es en vase al id del vambio de divisas, lo comentaré para que quede claro
+            }
+        }
+    }
+
 }
