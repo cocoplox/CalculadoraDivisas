@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import ivan.vega.divisas.R;
@@ -20,6 +21,14 @@ public class MainActivity extends AppCompatActivity {
     EditText inputValor;
     TextView resultado;
     RadioGroup redioGroupDivisas;
+
+
+    RadioButton radioButtonDOL;
+    RadioButton radioButtonYEN;
+    RadioButton radioButtonLB;
+    RadioButton radioButtonYU;
+
+
 
     public static final Double EUR_TO_DOLL = 1.08;
     public static final Double EUR_TO_YUAN = 7.67;
@@ -52,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
         configurarBotonNumerico(R.id.button7,"7",inputValor);
         configurarBotonNumerico(R.id.button8,"8",inputValor);
         configurarBotonNumerico(R.id.button9,"9",inputValor);
+
+         radioButtonDOL = findViewById(R.id.radioButtonDolar);
+         radioButtonYEN = findViewById(R.id.radioButtonYen);
+         radioButtonLB = findViewById(R.id.radioButtonLibra);
+         radioButtonYU = findViewById(R.id.radioButtonYuan);
 
         //La coma funciona algo diferente
 
@@ -109,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                inputValor.append(valor);
+                inputValor.append(valor + botonID);
             }
         });
     }
@@ -120,9 +134,8 @@ public class MainActivity extends AppCompatActivity {
             double valor = Double.parseDouble(valorTexto);
             double resultado = 0;
 
-            switch (radioGroupDivisas.getCheckedRadioButtonId()){
-                //Este switch es en vase al id del vambio de divisas, lo comentaré para que quede claro
-            }
+
+
         }
     }
 
