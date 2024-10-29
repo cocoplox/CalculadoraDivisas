@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                inputValor.append(valor + botonID);
+                inputValor.append(valor);
             }
         });
     }
