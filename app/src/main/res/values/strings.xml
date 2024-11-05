@@ -19,8 +19,9 @@
     <string name="ce">CE</string>
     <string name="coma">,</string>
     <string name="nothing">NOTHING</string>
-    <string name="atras">Borrar</string>
+    <string name="atras">&lt;-"</string>
     <string name="igual">=</string>
     <string name="resultado">Resultado</string>
     <string name="yuan">Yuan</string>
+    <string name="initial_value">0.0</string>
 </resources>

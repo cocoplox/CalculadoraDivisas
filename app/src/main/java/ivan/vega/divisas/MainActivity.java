@@ -1,29 +1,27 @@
 package ivan.vega.divisas;
 
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import ivan.vega.divisas.R;
+
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.IdRes;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Locale;
+
 
 public class MainActivity extends AppCompatActivity {
-    double tasaCambio = 1.0;
     EditText inputValor;
     TextView resultado;
     RadioGroup redioGroupDivisas;
@@ -46,13 +44,10 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        /*
+        Usando en metodo configurarBotonNumero, establecemos un listener a los botones, con su valor correspondiente
+         */
 
-        //Vamos al lio, objetivo : Hacerlo a tiempo real
-
-
-        //Atentos al fumadote para concatenar los numeros
-        //Esta vaina les da un onClickListener, que lo que hace es añadir el valor al final del
-        //input,
         inputValor = findViewById(R.id.editTextNumberDecimal); // Lo que ingresa el usuario
         resultado = findViewById(R.id.textView2);
         redioGroupDivisas = findViewById(R.id.radioGroup);
@@ -78,15 +73,12 @@ public class MainActivity extends AppCompatActivity {
         //La coma funciona algo diferente
 
         Button comaButton = findViewById(R.id.button11);
-        comaButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Pillamos el valor actual
-                String valorActual = inputValor.getText().toString();
-                //Comprovamos si ya existe una coma
-                if(!valorActual.contains(".")){
-                    inputValor.append(".");
-                }
+        comaButton.setOnClickListener(view -> {
+            //Pillamos el valor actual
+            String valorActual = inputValor.getText().toString();
+            //Comprovamos si ya existe una coma
+            if(!valorActual.contains(".")){
+                inputValor.append(".");
             }
         });
 
@@ -109,41 +101,47 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                //No lo vamos a usar
+
+                //verificamos que no supera los 2 decimales
+                String texto = s.toString();
+
+                if(texto.startsWith(".")){
+                    s.replace(0,1,"0.");
+                    return;
+                }
+                // Comprueba si el texto contiene un punto decimal
+                int indexDecimal = texto.indexOf(".");
+                if (indexDecimal >= 0) {
+                    // Limita a dos decimales
+                    if (texto.length() - indexDecimal - 1 > 2) {
+                        s.delete(indexDecimal + 3, texto.length());
+                    }
+                }
             }
         });
 
-        redioGroupDivisas.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                String valorTexto = inputValor.getText().toString();
-                if(!valorTexto.isEmpty()){
-                    resultado.setText(realizarCambioConversion(valorTexto));
-                }
-
+        redioGroupDivisas.setOnCheckedChangeListener((group, checkedId) -> {
+            String valorTexto = inputValor.getText().toString();
+            if(!valorTexto.isEmpty()){
+                resultado.setText(realizarCambioConversion(valorTexto));
             }
+
         });
 
         Button ceButton = findViewById(R.id.button12);
-        ceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Cuando se pulse este boton, el imput se tiene que limbiar,
-                inputValor.setText("");
-            }
+        ceButton.setOnClickListener(v -> {
+            //Cuando se pulse este boton, el imput se tiene que limbiar,
+            inputValor.setText("");
         });
 
         Button borrarButon = findViewById(R.id.button13);
-        borrarButon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Tenemos que eliminar el ultimo elemento
-                String valorActual = inputValor.getText().toString();
+        borrarButon.setOnClickListener(v -> {
+            //Tenemos que eliminar el ultimo elemento
+            String valorActual = inputValor.getText().toString();
 
-                if(!valorActual.isEmpty()){
-                    String nuevoValor = valorActual.substring(0,valorActual.length() -1);
-                    inputValor.setText(nuevoValor);
-                }
+            if(!valorActual.isEmpty()){
+                String nuevoValor = valorActual.substring(0,valorActual.length() -1);
+                inputValor.setText(nuevoValor);
             }
         });
 
@@ -161,51 +159,44 @@ public class MainActivity extends AppCompatActivity {
     }
     private void configurarBotonNumerico(int botonID, String valor, final EditText inputValor){
         Button boton = findViewById(botonID);
-        boton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                inputValor.append(valor);
-            }
-        });
+        boton.setOnClickListener(view -> inputValor.append(valor));
     }
     private String realizarCambioConversion(String valorTexto){
         //Este metodo pido el valor actual del input, en que divisa de conversion se encuentra, y finalmente el resultado, para cambiarlo
 
+        if(valorTexto.isEmpty() || valorTexto.equals(".")) {
+            return "0.0";
+        }
+
         double resultado = 0;
         String suffix = "";
 
-        if(!valorTexto.isEmpty()){
-            //Convertimos a double para poder operar
-            double valor = Double.parseDouble(valorTexto);
+        //Convertimos a double para poder operar
+        double valor = Double.parseDouble(valorTexto);
 
 
-            //Seguramente lo cambia a un switch mas adelante
-            if(radioButtonDOL.isChecked()){
-                //Pillamos el imput y, lo convertimos y devolvemos
-                resultado = valor * EUR_TO_DOLL;
-                suffix = "UDS";
-            }
-            if(radioButtonLB.isChecked()){
-                resultado = valor * EUR_TO_LIB;
-                suffix = "GBP";
-            }
-            if(radioButtonYEN.isChecked()){
-                resultado = valor * EUR_TO_YEN;
-                suffix = "JPY";
-            }
-            if(radioButtonYU.isChecked()){
-                resultado = valor * EUR_TO_YUAN;
-                suffix = "CNY";
-            }
-
-
+        //Seguramente lo cambia a un switch mas adelante
+        if(radioButtonDOL.isChecked()){
+            //Pillamos el imput y, lo convertimos y devolvemos
+            resultado = valor * EUR_TO_DOLL;
+            suffix = "USD $";
         }
-
+        if(radioButtonLB.isChecked()){
+            resultado = valor * EUR_TO_LIB;
+            suffix = "£";
+        }
+        if(radioButtonYEN.isChecked()){
+            resultado = valor * EUR_TO_YEN;
+            suffix = "JAP ¥";
+        }
+        if(radioButtonYU.isChecked()){
+            resultado = valor * EUR_TO_YUAN;
+            suffix = "CHN ¥";
+        }
 
         //Esto sinceramente lo ha hecho GPT xk no tengo ni idea de formatear cosas
         DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
-        String resultadoTexto = decimalFormat.format(resultado) + "  " + suffix;
-        return resultadoTexto;
+        return decimalFormat.format(resultado) + "  " + suffix;
     }
 
 }

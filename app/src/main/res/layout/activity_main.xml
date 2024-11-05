@@ -74,7 +74,7 @@
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="70dp"
                 android:ems="10"
                 android:hint="@string/resultado"
                 android:background="@color/teal_200"
@@ -111,6 +111,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:text="@string/uno"
+                            android:textSize="40dp"
                             android:layout_margin="5dp" />
 
                         <Button
@@ -120,6 +121,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:text="@string/dos"
+                            android:textSize="40dp"
                             android:layout_margin="5dp" />
 
                         <Button
@@ -129,6 +131,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:text="@string/tres"
+                            android:textSize="40dp"
                             android:layout_margin="5dp" />
                     </LinearLayout>
 
@@ -146,6 +149,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:text="@string/cuatro"
+                            android:textSize="40dp"
                             android:layout_margin="5dp" />
 
                         <Button
@@ -155,6 +159,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:text="@string/cinco"
+                            android:textSize="40dp"
                             android:layout_margin="5dp" />
 
                         <Button
@@ -164,6 +169,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:text="@string/seis"
+                            android:textSize="40dp"
                             android:layout_margin="5dp" />
                     </LinearLayout>
 
@@ -181,6 +187,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:text="@string/siete"
+                            android:textSize="40dp"
                             android:layout_margin="5dp"/>
 
                         <Button
@@ -190,6 +197,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:text="@string/ocho"
+                            android:textSize="40dp"
                             android:layout_margin="5dp" />
 
                         <Button
@@ -199,6 +207,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:text="@string/nueve"
+                            android:textSize="40dp"
                             android:layout_margin="5dp" />
                     </LinearLayout>
 
@@ -216,6 +225,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:text="@string/zero"
+                            android:textSize="40dp"
                             android:layout_margin="5dp"/>
 
                         <Button
@@ -234,6 +244,7 @@
                             android:layout_weight="1"
                             android:text="@string/coma"
                             android:layout_margin="5dp"
+                            android:textSize="40dp"
                             style="?android:attr/buttonBarButtonStyle"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -251,6 +262,7 @@
                         android:text="@string/ce"
                         android:layout_weight="1"
                         android:layout_margin="5dp"
+                        android:textSize="40dp"
                         style="?android:attr/buttonBarButtonStyle"/>
 
                     <Button
@@ -260,6 +272,7 @@
                         android:text="@string/atras"
                         android:layout_weight="1"
                         android:layout_margin="5dp"
+                        android:textSize="40dp"
                         style="?android:attr/buttonBarButtonStyle"/>
 
                     <Button
@@ -268,6 +281,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/igual"
                         android:layout_weight="1"
+                        android:textSize="40dp"
                         android:layout_margin="5dp"
                         style="?android:attr/buttonBarButtonStyle"/>
 
